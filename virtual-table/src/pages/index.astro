@@ -1,0 +1,23 @@
+---
+import { dbClient } from "@/services/db";
+import CompaniesTable from "@/components/companies-table";
+
+const companies = await dbClient.company.findMany({
+	take: 10000,
+});
+---
+
+<html lang="en" data-theme="nord">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Companies DB</title>
+	</head>
+	<body class="container max-w-screen-2xl py-6 px-4">
+		<h1 class="text-3xl text-center mb-4">Companies DB</h1>
+
+		<CompaniesTable client:load initialData={companies} />
+	</body>
+</html>
